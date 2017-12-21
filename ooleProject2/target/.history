@@ -1,0 +1,17 @@
+sbt compile
+compile
+run
+exit
+compile
+exit
+compile
+exit
+compile
+run
+exit
+compile
+run
+exit
+compile
+run
+exit

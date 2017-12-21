@@ -1,0 +1,8 @@
+MinNoOfClasses: 20
+MinNoOfMethodsDeclared: 3
+MinNoOfClassFields: 5
+MinNoOfConstructors: 1
+MinNoOfParametersMethod: 2
+MinNoOfStatementsMethod: 20
+MinNoOfArrayDeclarations: 3
+

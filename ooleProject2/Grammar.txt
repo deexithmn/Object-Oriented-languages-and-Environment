@@ -1,0 +1,60 @@
+ClassDeclaration: Modifier class Identifier [ extends TypeList ] [ implements TypeList ] ClassBody
+ClassBody: { FieldDeclaration } { MethodDeclaration } DefaultConstructor { ConstructorDeclaration }
+FieldDeclaration: Modifier localVariableDeclaration
+MethodDeclaration: Modifier Types Identifier (  ParameterList  ) MethodBody
+ParameterList: Parameter { Parameter1 }
+Parameter1: comma Parameter
+Parameter: ParameterVariable
+ParameterVariable: Types Identifier
+DefaultConstructor: Modifier Identifier ( ) ConstructorBody
+ConstructorDeclaration: Modifier Identifier (  ParameterList  ) ConstructorBody
+MethodBody: Block
+ConstructorBody: Block
+Block: BlockStatement
+BlockStatement: { localVariableDeclaration } { ArrayDeclaration } { Statement } [ ReturnStatement ]
+ReturnStatement: return LiteralExpression ;
+localVariableDeclaration: Types Identifier = Initialization ;
+ArrayDeclaration: Types es[ es] Identifier ;
+Initialization: % IntegerLiteral,StringLiteral,CharacterLiteral,BooleanLiteral %
+Statement: % Assignment,Assignment,IfThenStatement,DoStatement,WhileStatement,ForStatement %
+EmptyStatement: ;
+BreakStatement: break;
+ContinueStatement: continue;
+TerminalExpression: Expression ;
+IfThenStatement: if ( TestingExpression ) Statement [ else Statement ]
+Expression: % NumericExpression,TestingExpression,Logical,StringExpression,LiteralExpression,Identifier %
+Assignment: Identifier = Expression ;
+LoopAssignment: Identifier = RHS ;
+BracketedExpression: ( Expression )
+TestingExpression: Identifier RelationalOperation RHS
+RHS: LiteralExpression
+RelationalOperation: % ==,!= %
+NumericExpression: % ArithmeticExpression %
+ArithmeticExpression: Expression ArithmeticOperation Expression
+PreIncrementDecrement: PrePostOperations Identifier
+PostIncrementDecrement: Identifier PrePostOperations
+PrePostOperations: ++
+ArithmeticOperation: % +,*,-,/ %
+Logical: % true,false %
+NotExpression: ! Expression
+LogicalOps: % &,&=,|,|=,^,^=,&&,|| %
+LogicalExpr: Expression LogicalOps Expression
+TernaryExpression: Expression ? Expression : Expression
+StringExpression: Expression StringOperations Expression
+StringOperations: % +,+= %
+LiteralExpression: % IntegerLiteral,FloatLiteral,StringLiteral,CharacterLiteral,Logical,true,false %
+FloatLiteral:  Integer0 { Integer } Dot Integer { Integer }
+Integer0: % 1,2,3,4,5,6,7,8,9 %
+Integer: % 0,1,2,3,4,5,6,7,8,9 %
+Dot: .
+IntegerLiteral: Integer0 { Integer }
+alphabets: % a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z %
+StringLiteral: DoubleQuotation alphabets { alphabets } DoubleQuotation
+DoubleQuotation: "
+SingleQuotation: '
+CharacterLiteral: SingleQuotation alphabets SingleQuotation
+ForStatement: for (  LoopAssignment  TestingExpression ; ) Statement
+WhileStatement: while ( TestingExpression ) Statement
+DoStatement: do Statement while ( TestingExpression ) ;
+SwitchStatement: switch ( Expression ) \u{ { CaseStatement } [ DefaultStatement ] \u}
+CaseStatement: case Expression : Statement
